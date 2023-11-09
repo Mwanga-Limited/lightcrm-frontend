@@ -1,0 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useField } from 'formik';
+import { classNames } from 'utils/functions';
+type Props = {
+  label?: string;
+  name: string;
+  [x: string]: any;
+};
+const CustomInput = ({ label, ...props }: Props) => {
+  const [field, meta] = useField(props);
+
+  return (
+    <div>
+      {label && (
+        <label
+          htmlFor={props.name}
+          className="block text-base text-dark dark:text-white font-medium"
+        >
+          {label}
+        </label>
+      )}
+      <div className="mt-2">
+        <input
+          {...field}
+          id={props.name}
+          {...props}
+          className={classNames(
+            meta.touched && meta.error
+              ? 'ring-red-500 focus:ring-red-600 text-red-600 placeholder:text-red-600'
+              : 'ring-purpleColor focus:ring-purpleColor text-dark dark:text-white placeholder:text-dark/50',
+            'block w-full rounded-md border-0 py-[1.19rem] px-[1.44rem]  shadow-sm ring-1 ring-inset   placeholder:italic focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6 bg-transparent'
+          )}
+        />
+        {meta.touched && meta.error && (
+          <div className="text-red-500">{meta.error}</div>
+        )}
+      </div>
+    </div>
+  );
+};
+export default CustomInput;

@@ -24,7 +24,9 @@
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
       "@assets/*": ["assets/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
+      "@utils/*": ["utils/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "include": ["src"],
