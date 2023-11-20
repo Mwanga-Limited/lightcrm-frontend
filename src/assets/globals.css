@@ -3,32 +3,33 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --purple: #847EFA;
-  --orange: #FF8F6B;
-  --yellow: #FFCF51;
-}
-
-html {
-  --background: #fff;
-  --textcolor: #504E61;
-  --inner-bg: #F3EFFF;
-}
-
-html.dark {
-  --background: #504E61;
-  --textcolor: #FFFFFF;
-  --inner-bg: #22202E;
-}
-
 @layer base {
+  :root {
+    --purple: 133 127 250;
+    --orange: 255 144 107;
+    --yellow: 255 206 82;
+  }
+
   html {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins'sans-serif;
     font-weight: 400;
     letter-spacing: 0.025rem;
+    --background: 255 255 255;
+    --textcolor: 80 78 97;
+    --inner-bg: 244 240 255;
+  }
+
+  html.dark {
+    --background: 79 77 96;
+    --textcolor: 255 255 255;
+    --inner-bg: 34 32 46;
   }
 
   body::-webkit-scrollbar {
     display: none;
   }
+}
+
+.card {
+  @apply bg-bgColor rounded-lg px-3.5 py-2.5 shadow overflow-hidden
 }

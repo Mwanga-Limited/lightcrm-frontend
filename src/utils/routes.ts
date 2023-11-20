@@ -1,6 +1,9 @@
 export const HOME = '/';
 export const LOGIN = '/login';
 export const DASHBOARD = '/dashboard';
+export const SEARCH = '/search';
+export const DISPOSITIONS = '/dispositions';
+export const ESCALATIONS = '/escalations';
 export const BUCKET = '/bucket';
 export const ABOUT = '/about';
 export const PRICING = '/pricing';

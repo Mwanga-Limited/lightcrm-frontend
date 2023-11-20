@@ -9,24 +9,69 @@ import {
   FiUsers,
   FiX,
 } from 'react-icons/fi';
+import { LiaUserEditSolid } from 'react-icons/lia';
 import { classNames } from '@utils/functions';
 import { IconType } from 'react-icons';
 import Logo from '@components/common/Logo';
+import { DASHBOARD, DISPOSITIONS, ESCALATIONS } from '@utils/routes';
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: FiHome as IconType, current: true },
-  { name: 'Team', href: '#', icon: FiUsers as IconType, current: false },
-  { name: 'Projects', href: '#', icon: FiFolder as IconType, current: false },
-  { name: 'Calendar', href: '#', icon: FiCalendar as IconType, current: false },
-  { name: 'Documents', href: '#', icon: FiFile as IconType, current: false },
-  { name: 'Reports', href: '#', icon: FiPieChart as IconType, current: false },
+  {
+    name: 'Dashboard',
+    href: DASHBOARD,
+    icon: FiHome as IconType,
+  },
+  { name: 'Contacts', href: '#', icon: FiUsers as IconType },
+  {
+    name: 'Dispositions',
+    href: DISPOSITIONS,
+    icon: FiFolder as IconType,
+  },
+  {
+    name: 'Escalations',
+    href: ESCALATIONS,
+    icon: LiaUserEditSolid as IconType,
+  },
+  { name: 'Calendar', href: '#', icon: FiCalendar as IconType },
+  { name: 'Documents', href: '#', icon: FiFile as IconType },
+  { name: 'Reports', href: '#', icon: FiPieChart as IconType },
 ];
 
 type Props = {
   sidebarOpen: boolean;
+  page: string;
   setSidebarOpen: (x: boolean) => void;
+  setOpenDetails: (x: boolean) => void;
 };
-const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
+
+const SideBar = ({
+  sidebarOpen,
+  setSidebarOpen,
+  page,
+  setOpenDetails,
+}: Props) => {
+  const renderNavItems = () => {
+    return navigation.map((item) => (
+      <li key={item.name}>
+        <a
+          href={item.href}
+          className={classNames(
+            item.name === page
+              ? 'bg-purpleColor text-white rounded-r-full'
+              : 'text-textColor hover:bg-purpleColor hover:rounded-r-full',
+            'flex gap-x-3 rounded-md hover:text-white hover:bg-gradient-rev hover:opacity-80 pl-12 py-2 text-sm leading-6 font-semibold transition-all duration-500 ease-in-out'
+          )}
+        >
+          <div className="relative w-6">
+            <div className="absolute w-6 inset-0 flex items-center justify-center">
+              <item.icon aria-hidden="true" className="w-4 h-4" />
+            </div>
+          </div>
+          {item.name}
+        </a>
+      </li>
+    ));
+  };
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -44,7 +89,7 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-surface" />
+            <div className="fixed inset-0 bg-bgColor2/20 backdrop-blur" />
           </Transition.Child>
 
           <div className="fixed inset-0 flex">
@@ -70,86 +115,34 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
                   <div className="absolute left-full top-0 flex w-16 justify-center pt-5">
                     <button
                       type="button"
-                      className="-m-2.5 p-2.5"
+                      className="-m-2.5 p-2.5 bg-bgColor rounded-full shadow"
                       onClick={() => setSidebarOpen(false)}
                     >
                       <span className="sr-only">Close sidebar</span>
-                      <FiX className="h-6 w-6 text-white" aria-hidden="true" />
+                      <FiX
+                        className="h-6 w-6 text-textColor"
+                        aria-hidden="true"
+                      />
                     </button>
                   </div>
                 </Transition.Child>
 
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-primary-light dark:bg-primary-dark pb-2 ring-1 ring-white/10">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-bgColor pb-2 ring-1 ring-white/10">
                   <div className="flex  px-6 h-16 pt-4 shrink-0 items-center">
                     <Logo />
                   </div>
                   <nav className="flex flex-1 flex-col">
                     <ul role="list" className="-mx-2 flex-1 space-y-4 w-[98%]">
-                      {navigation.map((item) => (
-                        <li key={item.name}>
-                          <a
-                            href={item.href}
-                            className={classNames(
-                              item.current
-                                ? 'bg-gradient-linear text-white rounded-r-full'
-                                : 'text-primary-dark dark:text-white hover:bg-gray-50 hover:rounded-r-full',
-                              'group flex gap-x-3 rounded-md hover:text-white hover:bg-gradient-rev opacity-100 hover:opacity-50 pl-12 py-2 text-sm leading-6 font-semibold transition-all duration-500 ease-in-out'
-                            )}
-                          >
-                            <div className="relative w-6 text-white">
-                              <div className="absolute inset-0 group-hover:hidden">
-                                <svg
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="w-8 h-8 transition-colors duration-300 ease-in-out"
-                                >
-                                  <linearGradient
-                                    id={`gradient-mobile-${item.name}`}
-                                    gradientUnits="userSpaceOnUse"
-                                    x1="0"
-                                    y1="0"
-                                    x2="24"
-                                    y2="24"
-                                  >
-                                    <stop
-                                      offset="0%"
-                                      stopColor={
-                                        item.current ? '#FFFFFF' : '#FD749B'
-                                      }
-                                    />
-                                    <stop
-                                      offset="100%"
-                                      stopColor={
-                                        item.current ? '#FFFFFF' : '#281AC8'
-                                      }
-                                    />
-                                  </linearGradient>
-                                  <mask id={`icon-mobile-mask-${item.name}`}>
-                                    <item.icon
-                                      aria-hidden="true"
-                                      name={item.name}
-                                    />
-                                  </mask>
-                                  <rect
-                                    fill={`url(#gradient-mobile-${item.name})`}
-                                    mask={`url(#icon-mobile-mask-${item.name})`}
-                                    width="24"
-                                    height="24"
-                                  />
-                                </svg>
-                              </div>
-                              <div className="hidden absolute w-6 inset-0 group-hover:flex items-center justify-center">
-                                <item.icon
-                                  aria-hidden="true"
-                                  className=" text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
-                                />
-                              </div>
-                            </div>
-                            {item.name}
-                          </a>
-                        </li>
-                      ))}
+                      {renderNavItems()}
+                      <li>
+                        <button
+                          type="button"
+                          className="flex gap-x-3 rounded-md hover:text-white hover:bg-gradient-rev hover:opacity-80 pl-12 py-2 text-sm leading-6 font-semibold transition-all duration-500 ease-in-out"
+                          onClick={() => setOpenDetails(true)}
+                        >
+                          <span className="">Open customer details</span>
+                        </button>
+                      </li>
                     </ul>
                   </nav>
                 </div>
@@ -163,64 +156,16 @@ const SideBar = ({ sidebarOpen, setSidebarOpen }: Props) => {
       <div className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-40 lg:block lg:w-64 lg:overflow-y-auto lg:bg-bgColor lg:pb-4 drop-shadow-lg min-h-full">
         <nav className="mt-32">
           <ul role="list" className="-mx-2 space-y-4 w-[98%]">
-            {navigation.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? 'bg-purpleColor text-white rounded-r-full'
-                      : 'text-textColor hover:bg-gray-50 hover:rounded-r-full',
-                    'group flex gap-x-3 rounded-md hover:text-white hover:bg-gradient-rev hover:opacity-50 pl-12 py-2 text-sm leading-6 font-semibold transition-all duration-500 ease-in-out'
-                  )}
-                >
-                  <div className="relative w-6 text-white">
-                    <div className="absolute inset-0 group-hover:hidden">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-8 h-8 opacity-100 transition-colors duration-300 ease-in-out"
-                      >
-                        <linearGradient
-                          id={`gradient-${item.name}`}
-                          gradientUnits="userSpaceOnUse"
-                          x1="0"
-                          y1="0"
-                          x2="24"
-                          y2="24"
-                        >
-                          <stop
-                            offset="0%"
-                            stopColor={item.current ? '#FFFFFF' : '#FD749B'}
-                          />
-                          <stop
-                            offset="100%"
-                            stopColor={item.current ? '#FFFFFF' : '#281AC8'}
-                          />
-                        </linearGradient>
-                        <mask id={`icon-mask-${item.name}`}>
-                          <item.icon aria-hidden="true" name={item.name} />
-                        </mask>
-                        <rect
-                          fill={`url(#gradient-${item.name})`}
-                          mask={`url(#icon-mask-${item.name})`}
-                          width="24"
-                          height="24"
-                        />
-                      </svg>
-                    </div>
-                    <div className="hidden absolute w-6 inset-0 group-hover:flex items-center justify-center">
-                      <item.icon
-                        aria-hidden="true"
-                        className=" text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
-                      />
-                    </div>
-                  </div>{' '}
-                  {item.name}
-                </a>
-              </li>
-            ))}
+            {renderNavItems()}
+            <li>
+              <button
+                type="button"
+                className="flex gap-x-3 rounded-md hover:text-white hover:bg-gradient-rev hover:opacity-80 pl-12 py-2 text-sm leading-6 font-semibold transition-all duration-500 ease-in-out"
+                onClick={() => setOpenDetails(true)}
+              >
+                <span className="">Open customer details</span>
+              </button>
+            </li>
           </ul>
         </nav>
       </div>

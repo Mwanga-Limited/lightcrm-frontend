@@ -5,12 +5,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        textColor: 'var(--textcolor)',
-        bgColor: 'var(--background)',
-        bgColor2: 'var(--inner-bg)',
-        purpleColor: 'var(--purple)',
-        orangeColor: 'var(--orange)',
-        yellowColor: 'var(--yellow)',
+        textColor: 'rgb(var(--textcolor) / <alpha-value>)',
+        bgColor: 'rgb(var(--background) / <alpha-value>)',
+        bgColor2: 'rgb(var(--inner-bg) / <alpha-value>)',
+        purpleColor: 'rgb(var(--purple) / <alpha-value>)',
+        orangeColor: 'rgb(var(--orange) / <alpha-value>)',
+        yellowColor: 'rgb(var(--yellow) / <alpha-value>)',
       },
     },
   },

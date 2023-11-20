@@ -7,8 +7,8 @@ import { BUCKET } from 'utils/routes';
 const Login = () => {
   const navigate = useNavigate();
   return (
-    <section className="px-6 sm:px-16 pt-20 xl:px-32 flex flex-col gap-6 min-h-screen">
-      <header className="font-medium text-dark dark:text-white text-center lg:text-left capitalize">
+    <section className="px-6 sm:px-16 pt-20 xl:px-32 flex flex-col gap-6 min-h-screen bg-bgColor">
+      <header className="font-medium text-textColor text-center lg:text-left capitalize">
         <h1 className="text-2xl lg:text-4xl mb-2">
           Hi there and welcome back to{' '}
           <span className="text-purpleColor font-bold">LightCrm</span>

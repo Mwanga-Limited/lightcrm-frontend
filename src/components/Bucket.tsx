@@ -5,9 +5,11 @@ import { DASHBOARD } from 'utils/routes';
 
 const BucketPage = () => {
   const navigate = useNavigate();
-  const [dialtype, setDialType] = useState(null);
-  const [project, setProject] = useState(null);
-  const [bucket, setBucket] = useState(null);
+  const [dialtype, setDialType] = useState<Record<string, unknown> | null>(
+    null
+  );
+  const [project, setProject] = useState<Record<string, unknown> | null>(null);
+  const [bucket, setBucket] = useState<Record<string, unknown> | null>(null);
   return (
     <div className="min-h-screen bg-gradient-to-br from-purpleColor to-orangeColor/60 flex flex-col gap-8 justify-center items-center w-full px-4 py-16">
       <h1 className="text-dark font-bold text-2xl">
