@@ -8,7 +8,7 @@ const ToggleSwitch = () => {
     <Switch
       checked={activeTheme === 'light'}
       onChange={() => setTheme(activeTheme)}
-      className="bg-transparent  border-2 border-grey-light dark:border-border-light  relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-0"
+      className="bg-transparent border-2 border-purpleColor dark:border-white  relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-0"
     >
       <span className="sr-only">Use setting</span>
       <span className="bg-gradient-linear translate-x-0 dark:translate-x-5 pointer-events-none relative inline-block h-5 w-5 transform rounded-full shadow ring-0 transition duration-200 ease-in-out">
@@ -22,7 +22,7 @@ const ToggleSwitch = () => {
           className="opacity-100 duration-200 ease-in dark:opacity-0 dark:duration-100 dark:ease-out absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
           aria-hidden="true"
         >
-          <FiSun className="text-gray-200 hover:text-gray-50 text-sm" />
+          <FiSun className="text-purpleColor text-sm" />
         </span>
       </span>
     </Switch>

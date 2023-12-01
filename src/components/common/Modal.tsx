@@ -7,10 +7,17 @@ type Props = {
   open: boolean;
   closeModal: (x: boolean) => void;
   children: ReactNode;
-  size?: 'max-w-lg' | 'max-w-md' | 'max-w-sm' | 'max-w-xl';
+  title?: string;
+  size?: 'max-w-lg' | 'max-w-md' | 'max-w-sm' | 'max-w-xl' | 'max-w-5xl';
 };
 
-export default function Modal({ open, closeModal, children, size }: Props) {
+export default function Modal({
+  open,
+  title,
+  closeModal,
+  children,
+  size,
+}: Props) {
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50" onClose={closeModal}>
@@ -43,8 +50,9 @@ export default function Modal({ open, closeModal, children, size }: Props) {
                   'text-textColor w-full transform overflow-hidden rounded-2xl bg-bgColor p-6 text-left align-middle shadow-xl transition-all'
                 )}
               >
-                <div className="py-4">
-                  <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
+                <div className={title ? 'pb-4' : 'py-4'}>
+                  <h2 className="text-lg font-medium">{title}</h2>
+                  <div className="absolute right-0 top-2 hidden pr-4 pt-4 sm:block">
                     <button
                       type="button"
                       className="rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

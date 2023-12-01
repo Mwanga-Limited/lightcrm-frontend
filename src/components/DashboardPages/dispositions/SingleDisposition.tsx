@@ -1,21 +1,33 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import DashboardLayout from '../DashboardLayout';
 import { Tab } from '@headlessui/react';
 import { classNames } from '@utils/functions';
+import { ChevronLeftIcon } from '@heroicons/react/20/solid';
 
 export default function SingleDisposition() {
+  const navigate = useNavigate();
   const { loanId } = useParams();
 
   return (
     <DashboardLayout page="Dispositions">
       <div className="card">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-base font-semibold leading-7 text-textColor">
-            Customer Information
-          </h3>
-          <p className="mt-1 max-w-2xl text-sm leading-6 text-textColor/80">
-            Personal details.
-          </p>
+        <div className="flex justify-between gap-2">
+          <div className="px-4 sm:px-0">
+            <h3 className="text-base font-semibold leading-7 text-textColor">
+              Customer Information
+            </h3>
+            <p className="mt-1 max-w-2xl text-sm leading-6 text-textColor/80">
+              Personal details.
+            </p>
+          </div>
+          <div>
+            <button
+              onClick={() => navigate(-1)}
+              className="flex items-center gap-2 justify-center bg-purpleColor py-1.5 px-3 rounded hover:opacity-80 text-white font-medium shadow-sm"
+            >
+              <ChevronLeftIcon className="h-4 w-4" /> Back
+            </button>
+          </div>
         </div>
         <div className="mt-6">
           <dl className="grid grid-cols-1 sm:grid-cols-2">

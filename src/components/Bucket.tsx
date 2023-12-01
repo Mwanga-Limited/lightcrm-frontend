@@ -2,6 +2,7 @@ import { useState } from 'react';
 import HDSelectBox from './common/HDSelectBox';
 import { useNavigate } from 'react-router-dom';
 import { DASHBOARD } from 'utils/routes';
+import { buckets, dialType, projects } from '@utils/mockdata';
 
 const BucketPage = () => {
   const navigate = useNavigate();
@@ -53,20 +54,5 @@ const BucketPage = () => {
     </div>
   );
 };
-const projects = [
-  { name: 'Branch' },
-  { name: 'Carbon' },
-  { name: 'UMBA' },
-  { name: 'FCMB' },
-  { name: 'Black Copper' },
-];
-const buckets = [
-  { name: 'L' },
-  { name: 'A' },
-  { name: 'B' },
-  { name: 'C' },
-  { name: 'D' },
-];
-const dialType = [{ name: 'Auto Dial' }, { name: 'Manual' }];
 
 export default BucketPage;

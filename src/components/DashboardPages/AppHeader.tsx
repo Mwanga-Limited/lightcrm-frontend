@@ -73,9 +73,9 @@ const AppHeader = ({ setSidebarOpen, openDetails, setOpenDetails }: Props) => {
           />
           <input
             id="search-field"
-            className="block h-full w-full border-0 py-2 pl-8 pr-0 placeholder:text-gray-400 focus:ring-0 sm:text-sm bg-bgColor2 rounded"
-            placeholder="Enter customer name to search..."
-            title="Enter customer name to search"
+            className="block h-full w-full border-0 py-2 pl-8 pr-0 placeholder:text-gray-400 focus:ring-0 sm:text-sm bg-bgColor2 rounded ring-0 focus:outline-purpleColor"
+            placeholder="Enter Loan id to search..."
+            title="Enter Loan id to search"
             type="search"
             name="search"
             value={searchTerm}

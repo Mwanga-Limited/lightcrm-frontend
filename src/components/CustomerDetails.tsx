@@ -1,9 +1,9 @@
 import Modal from '@components/common/Modal';
-import { Tab } from '@headlessui/react';
 import { classNames } from '@utils/functions';
 import { Form, Formik } from 'formik';
 import CustomSelect from './common/CustomSelect';
 import CustomInput from './common/CustomInput';
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
 
 type Props = {
   open: boolean;
@@ -29,6 +29,7 @@ export default function CustomerDetails({ open, setOpen }: Props) {
     amount_disbursed: '',
     amount_repaid: '',
     amount_delinquent: '',
+    days_delinquent: '',
     discount_type: '',
     discounted_balance: '',
     repayment_bank_name: '',
@@ -45,72 +46,57 @@ export default function CustomerDetails({ open, setOpen }: Props) {
     ecalation_to: '',
   };
   return (
-    <Modal open={open} closeModal={setOpen} size="max-w-xl">
+    <Modal
+      open={open}
+      closeModal={setOpen}
+      size="max-w-5xl"
+      title="Customer Details"
+    >
       <div className="w-full px-2 sm:px-0">
         <Formik initialValues={initialValues} onSubmit={() => {}}>
           {({ isSubmitting }) => (
             <Form>
-              <Tab.Group>
-                <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
-                  {Object.keys(categories).map((category) => (
-                    <Tab
-                      key={category}
-                      className={({ selected }) =>
-                        classNames(
-                          selected
-                            ? 'bg-purpleColor shadow text-white'
-                            : 'hover:bg-white/[0.12] hover:text-white',
-                          'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-textColor',
-                          'focus:outline-none focus:ring-0'
-                        )
-                      }
+              {Object.values(categories).map((items, idx) => (
+                <div key={idx} className={classNames('rounded-xl p-3', '')}>
+                  <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-col gap-x-6 gap-y-2">
+                    {items.map((item) =>
+                      item.type === 'select' ? (
+                        <CustomSelect
+                          key={item.name}
+                          label={item.label}
+                          name={item.name}
+                          placeholder={item.placeholder}
+                          disabled={isSubmitting}
+                        >
+                          <option value="">{item.placeholder}</option>
+                          {(item.options as string[]).map((val) => (
+                            <option key={val} value={val}>
+                              {val}
+                            </option>
+                          ))}
+                        </CustomSelect>
+                      ) : (
+                        <CustomInput
+                          key={item.name}
+                          label={item.label}
+                          name={item.name}
+                          type={item.type}
+                          placeholder={item.placeholder}
+                          disabled={isSubmitting}
+                        />
+                      )
+                    )}
+                  </div>
+                  <div className="flex justify-end py-2">
+                    <button
+                      type="submit"
+                      className="flex items-center gap-2 justify-center bg-purpleColor py-1.5 px-3 rounded hover:opacity-80 text-white font-medium shadow-sm"
                     >
-                      <span className="hidden sm:inline">{category}</span>
-                      <span className="sm:hidden">
-                        {category.split(' ')[0]}
-                      </span>
-                    </Tab>
-                  ))}
-                </Tab.List>
-                <Tab.Panels className="mt-2">
-                  {Object.values(categories).map((items, idx) => (
-                    <Tab.Panel
-                      key={idx}
-                      className={classNames('rounded-xl p-3', '')}
-                    >
-                      <ul className="grid sm:grid-cols-2 gap-4">
-                        {items.map((item) =>
-                          item.type === 'select' ? (
-                            <CustomSelect
-                              key={item.name}
-                              label={item.label}
-                              name={item.name}
-                              placeholder={item.placeholder}
-                              disabled={isSubmitting}
-                            >
-                              <option value="">{item.placeholder}</option>
-                              {(item.options as string[]).map((val) => (
-                                <option key={val} value={val}>
-                                  {val}
-                                </option>
-                              ))}
-                            </CustomSelect>
-                          ) : (
-                            <CustomInput
-                              key={item.name}
-                              label={item.label}
-                              name={item.name}
-                              type={item.type}
-                              placeholder={item.placeholder}
-                              disabled={isSubmitting}
-                            />
-                          )
-                        )}
-                      </ul>
-                    </Tab.Panel>
-                  ))}
-                </Tab.Panels>
-              </Tab.Group>
+                      <CheckCircleIcon className="h-6 w-6" /> Save
+                    </button>
+                  </div>
+                </div>
+              ))}
             </Form>
           )}
         </Formik>
@@ -120,7 +106,7 @@ export default function CustomerDetails({ open, setOpen }: Props) {
 }
 
 const categories: Record<string, IformFields[]> = {
-  'Personal & Loan Info': [
+  'Customer Details': [
     {
       label: 'Customer Name',
       type: 'text',
@@ -188,6 +174,12 @@ const categories: Record<string, IformFields[]> = {
       placeholder: 'Amount Delinquent',
     },
     {
+      label: 'Days Delinquent',
+      type: 'number',
+      name: 'days_delinquent',
+      placeholder: 'Days Delinquent',
+    },
+    {
       label: 'Discount Type',
       type: 'text',
       name: 'discount_type',
@@ -211,8 +203,6 @@ const categories: Record<string, IformFields[]> = {
       name: 'repayment_nuban',
       placeholder: 'Repayment NUBAN',
     },
-  ],
-  'Disposition Info': [
     {
       label: 'Call Disposition Date',
       type: 'text',
@@ -296,8 +286,6 @@ const categories: Record<string, IformFields[]> = {
         'Switched off',
       ],
     },
-  ],
-  'Escalation Info': [
     {
       label: 'Escalation type',
       name: 'ecalation_type',

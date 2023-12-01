@@ -3,17 +3,24 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { classNames } from '@utils/functions';
 type Props = {
+  disabled?: boolean;
   options: Record<string, unknown>[];
   label?: string;
   status?: string;
   selected?: Record<string, unknown> | null;
   setSelected: (x: any) => void;
 };
-const HDSelectBox = ({ options, label = '', selected, setSelected }: Props) => {
+const HDSelectBox = ({
+  options,
+  label = '',
+  selected,
+  setSelected,
+  disabled = false,
+}: Props) => {
   return (
     <div>
       {label && <p className="text-textColor font-medium">{label}</p>}
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={setSelected} disabled={disabled}>
         <div className="relative mt-1">
           <Listbox.Button className=" text-textColor relative w-full cursor-default rounded-lg min-h-[2.25rem] bg-bgColor py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
             <div className="flex gap-2 items-center">

@@ -28,7 +28,7 @@ const CustomInput = ({ label, ...props }: Props) => {
             meta.touched && meta.error
               ? 'ring-red-500 focus:ring-red-600 text-red-600 placeholder:text-red-600'
               : 'ring-purpleColor focus:ring-purpleColor text-dark dark:text-white placeholder:text-dark/50',
-            'block w-full rounded-md border-0 py-2 px-2.5 shadow-sm ring-1 ring-inset   placeholder:italic focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6 bg-transparent'
+            'block w-full rounded-md border-0 py-1.5 px-2.5 shadow-sm ring-1 ring-inset   placeholder:italic focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6 bg-transparent'
           )}
         />
         {meta.touched && meta.error && (

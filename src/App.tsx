@@ -1,6 +1,7 @@
 import BucketPage from '@components/Bucket';
 import Escalations from '@components/DashboardPages/Escalations';
 import Home from '@components/DashboardPages/Home';
+import LeadsManagement from '@components/DashboardPages/Lead/LeadsManagement';
 import SearchPage from '@components/DashboardPages/SearchPage';
 import DispositionPage from '@components/DashboardPages/dispositions/DispositionPage';
 import SingleDisposition from '@components/DashboardPages/dispositions/SingleDisposition';
@@ -9,12 +10,12 @@ import { Toaster } from 'react-hot-toast';
 import { Routes, Route } from 'react-router-dom';
 // import ProtectedRoutes from 'utils/ProtectedRoute';
 import {
-  ABOUT,
   BUCKET,
   DASHBOARD,
   DISPOSITIONS,
   ESCALATIONS,
   HOME,
+  LEADS_MANAGEMENT,
   LOGIN,
   PRICING,
   SEARCH,
@@ -37,7 +38,7 @@ function App() {
           element={<SingleDisposition />}
         />
         <Route path={ESCALATIONS} element={<Escalations />} />
-        <Route path={ABOUT} element={<>Hi I am a About page</>} />
+        <Route path={LEADS_MANAGEMENT} element={<LeadsManagement />} />
         <Route path={PRICING} element={<>Hi I am a pricing page</>} />
         <Route path={'message'} element={<>Hi I am a message page</>} />
         <Route path="*" element={<NoMatch />} />

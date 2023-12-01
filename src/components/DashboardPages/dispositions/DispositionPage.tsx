@@ -2,44 +2,88 @@ import { Link } from 'react-router-dom';
 import DashboardLayout from '../DashboardLayout';
 import { USERS } from '@utils/mockdata';
 import { DISPOSITIONS } from '@utils/routes';
+import Pagination from '@components/Pagination';
 
 export default function DispositionPage() {
   return (
     <DashboardLayout page="Dispositions">
-      <div className="card mb-4">Viewing Search results for</div>
       <div className="card">
-        <ul
-          role="list"
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
-        >
-          {USERS?.map((person) => (
-            <li
-              key={person.loan_id}
-              className="col-span-1 divide-y divide-gray-200 rounded-lg bg-bgColor shadow"
-            >
-              <div className="flex w-full items-center justify-between space-x-6 p-6">
-                <div className="flex-1 truncate">
-                  <div className="flex items-center justify-between space-x-3">
-                    <h3 className="truncate text-sm font-medium ">
-                      {person.name}
-                    </h3>
-                    <span>
-                      <Link
-                        to={`${DISPOSITIONS}/${person.loan_id}`}
-                        className="font-medium text-purpleColor hover:opacity-80"
+        <h2 className="capitalize font-Bold text-2xl">My Dispositions</h2>
+        <div className="mt-8 flow-root">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+              <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                <table className="min-w-full divide-y divide-gray-300">
+                  <thead className="text-textColor">
+                    <tr>
+                      <th
+                        scope="col"
+                        className="hidden px-3 py-3.5 text-left text-sm font-semibold  lg:table-cell"
                       >
-                        view
-                      </Link>
-                    </span>
-                  </div>
-                  <p className="mt-1 truncate text-sm text-textColor/70">
-                    Loan Id: {person.loan_id}
-                  </p>
-                </div>
+                        Disposition Date
+                      </th>
+                      <th
+                        scope="col"
+                        className="py-3.5 pl-4 px-3 text-left text-sm font-semibold  sm:pl-6"
+                      >
+                        Name
+                      </th>
+                      <th
+                        scope="col"
+                        className="hidden px-3 py-3.5 text-left text-sm font-semibold  sm:table-cell"
+                      >
+                        Comment
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-3 py-3.5 text-left text-sm font-semibold "
+                      >
+                        Reason
+                      </th>
+                      <th
+                        scope="col"
+                        className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                      >
+                        <span className="sr-only">View</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 text-textColor/70">
+                    {USERS.map((person) => (
+                      <tr key={person.loan_id}>
+                        <td className="hidden px-3 py-4 text-sm lg:table-cell">
+                          {person.date}
+                        </td>
+                        <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium sm:w-auto sm:max-w-none sm:pl-6">
+                          {person.name}
+                          <dl className="font-normal grid grid-cols-2 gap-1 pt-1 lg:hidden">
+                            <dt className="font-bold">Disposition Date:</dt>
+                            <dd className=" ">{person.date}</dd>
+                            <dt className="font-bold sm:hidden">comment:</dt>
+                            <dd className=" sm:hidden">{person.comment}</dd>
+                          </dl>
+                        </td>
+                        <td className="hidden px-3 py-4 text-sm sm:table-cell">
+                          {person.comment}
+                        </td>
+                        <td className="px-3 py-4 text-sm">{person.reason}</td>
+                        <td className="py-4 pl-3 pr-4 text-right sm:pr-6">
+                          <Link
+                            to={`${DISPOSITIONS}/${person.loan_id}`}
+                            className="text-orangeColor hover:text-purpleColor h-6 w-6"
+                          >
+                            view
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <Pagination />
               </div>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </DashboardLayout>
   );

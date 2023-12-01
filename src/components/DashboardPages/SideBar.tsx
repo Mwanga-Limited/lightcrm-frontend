@@ -13,7 +13,13 @@ import { LiaUserEditSolid } from 'react-icons/lia';
 import { classNames } from '@utils/functions';
 import { IconType } from 'react-icons';
 import Logo from '@components/common/Logo';
-import { DASHBOARD, DISPOSITIONS, ESCALATIONS } from '@utils/routes';
+import {
+  DASHBOARD,
+  DISPOSITIONS,
+  ESCALATIONS,
+  LEADS_MANAGEMENT,
+} from '@utils/routes';
+import { Link } from 'react-router-dom';
 
 const navigation = [
   {
@@ -21,7 +27,6 @@ const navigation = [
     href: DASHBOARD,
     icon: FiHome as IconType,
   },
-  { name: 'Contacts', href: '#', icon: FiUsers as IconType },
   {
     name: 'Dispositions',
     href: DISPOSITIONS,
@@ -32,7 +37,12 @@ const navigation = [
     href: ESCALATIONS,
     icon: LiaUserEditSolid as IconType,
   },
-  { name: 'Calendar', href: '#', icon: FiCalendar as IconType },
+  {
+    name: 'Lead Management',
+    href: LEADS_MANAGEMENT,
+    icon: FiCalendar as IconType,
+  },
+  { name: 'Contacts', href: '#', icon: FiUsers as IconType },
   { name: 'Documents', href: '#', icon: FiFile as IconType },
   { name: 'Reports', href: '#', icon: FiPieChart as IconType },
 ];
@@ -53,8 +63,8 @@ const SideBar = ({
   const renderNavItems = () => {
     return navigation.map((item) => (
       <li key={item.name}>
-        <a
-          href={item.href}
+        <Link
+          to={item.href}
           className={classNames(
             item.name === page
               ? 'bg-purpleColor text-white rounded-r-full'
@@ -68,7 +78,7 @@ const SideBar = ({
             </div>
           </div>
           {item.name}
-        </a>
+        </Link>
       </li>
     ));
   };

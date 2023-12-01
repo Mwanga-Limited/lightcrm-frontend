@@ -1,7 +1,9 @@
 import DashboardLayout from '@components/DashboardPages/DashboardLayout';
+import Pagination from '@components/Pagination';
 import { PhoneIcon } from '@heroicons/react/20/solid';
 import { classNames } from '@utils/functions';
 import { cards } from '@utils/mockdata';
+import { Link } from 'react-router-dom';
 
 const people = [
   {
@@ -130,20 +132,21 @@ const Home = () => {
                             {person.amount_delinquent}
                           </td>
                           <td className="py-4 pl-3 pr-4 text-right sm:pr-6">
-                            <a
-                              href="#"
+                            <Link
+                              to="#"
                               className="text-indigo-600 hover:text-indigo-900 h-6 w-6"
                             >
                               <PhoneIcon />
                               <span className="sr-only">
                                 Call, {person.name}
                               </span>
-                            </a>
+                            </Link>
                           </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
+                  <Pagination />
                 </div>
               </div>
             </div>
